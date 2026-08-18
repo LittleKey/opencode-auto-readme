@@ -1,8 +1,10 @@
 # opencode-auto-readme
 
-An [opencode](https://opencode.ai) plugin that keeps your directory-level `README.md` files in sync with code changes — automatically.
+An [opencode](https://opencode.ai) **plugin + skill** that keeps your directory-level `README.md` files in sync with code changes — automatically.
 
 Every time you edit a code file, the plugin asks your current opencode session to check whether the `README.md` next to that file needs an update (new file added to the docs table, changed purpose, updated exports, …). Trivial changes are skipped, so it stays quiet unless there is a genuine reason to touch the README.
+
+The package also bundles the **`auto-readme` skill** - the conventions for *how* to write those directory READMEs (structure, Files table, Exports section, length limits). The plugin auto-registers the skill at startup, so installing the plugin installs both. No extra config.
 
 ## Install
 
@@ -49,10 +51,22 @@ opencode installs it with Bun at startup and resolves the package entry from the
 
 ### Local install (no npm)
 
-Copy `auto-readme.js` into one of the plugin directories and restart opencode:
+Clone the repo (or copy it) and point the `plugin` array at the local entry - the config hook inside the plugin registers the bundled skill automatically:
 
-- global: `~/.config/opencode/plugins/auto-readme.js`
-- project: `.opencode/plugins/auto-readme.js`
+```json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "plugin": ["~/github/opencode-auto-readme/auto-readme.js"]
+}
+```
+
+Alternatively, copy the pieces manually and restart opencode:
+
+- plugin, global: `auto-readme.js` -> `~/.config/opencode/plugins/auto-readme.js`
+- plugin, project: `auto-readme.js` -> `.opencode/plugins/auto-readme.js`
+- skill: `skills/auto-readme/` -> `~/.config/opencode/skills/auto-readme/` (or `.opencode/skills/auto-readme/`)
+
+Note: with the manual copy, the plugin file lands outside the package, so its config hook would point at a nonexistent `skills/` dir - that is fine (the hook is skipped), just make sure you copy the skill folder as shown above.
 
 ## How it works
 

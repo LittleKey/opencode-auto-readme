@@ -1,12 +1,13 @@
 {
   "name": "opencode-auto-readme",
   "version": "0.1.0",
-  "description": "OpenCode plugin that automatically keeps directory README.md files in sync with code changes",
+  "description": "OpenCode plugin + skill that automatically keeps directory README.md files in sync with code changes",
   "type": "module",
   "main": "./auto-readme.js",
   "exports": "./auto-readme.js",
   "files": [
     "auto-readme.js",
+    "skills/",
     "README.md",
     "README-zh.md",
     "LICENSE"
@@ -14,6 +15,7 @@
   "keywords": [
     "opencode",
     "opencode-plugin",
+    "opencode-skill",
     "readme",
     "documentation",
     "automation",

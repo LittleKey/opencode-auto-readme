@@ -1,12 +1,19 @@
 /**
- * auto-readme — an opencode plugin that keeps directory README.md files in
+ * auto-readme - an opencode plugin that keeps directory README.md files in
  * sync with code changes.
  *
  * Whenever a code file is edited, the plugin prompts the current session to
  * check whether the README.md next to that file needs updating.
  *
- * Hooks used: file.edited
+ * Hooks used: file.edited, config (auto-registers the bundled
+ * skills/auto-readme skill so plugin + skill install together)
  */
+
+import path from 'path'
+import { fileURLToPath } from 'url'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const SKILLS_DIR = path.resolve(__dirname, 'skills')
 
 export const AutoReadmePlugin = async ({ client, $, directory }) => {
   const CODE_EXTENSIONS = new Set([
@@ -111,6 +118,16 @@ IMPORTANT: Only modify README.md if there's a genuine need. Do not update for mi
   }
 
   return {
+    // Auto-register the bundled skill directory, so installing this plugin
+    // also installs the "auto-readme" skill (same mechanism superpowers uses).
+    config: async (config) => {
+      config.skills = config.skills || {}
+      config.skills.paths = config.skills.paths || []
+      if (!config.skills.paths.includes(SKILLS_DIR)) {
+        config.skills.paths.push(SKILLS_DIR)
+      }
+    },
+
     "file.edited": async (input, output) => {
       const { filePath } = input
 

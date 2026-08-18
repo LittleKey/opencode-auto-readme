@@ -1,8 +1,10 @@
 # opencode-auto-readme
 
-一个 [opencode](https://opencode.ai) 插件：当代码文件被修改时，自动让当前会话检查并更新所在目录的 `README.md`，保持目录级文档与代码同步。
+一个 [opencode](https://opencode.ai) **插件 + 技能（skill）**：当代码文件被修改时，自动让当前会话检查并更新所在目录的 `README.md`，保持目录级文档与代码同步。
 
 每次编辑代码文件后，插件会提示当前 opencode 会话检查该文件所在目录的 `README.md` 是否需要更新（新增文件加入文档表格、用途变化、导出 API 变化等）。琐碎改动会被跳过，只有确实需要时才会动 README。
+
+包内还内置了 **`auto-readme` 技能**：它是“怎么写好目录 README”的规范（结构、Files 表格、Exports 部分、长度限制）。插件启动时会自动注册该技能，因此安装插件即同时获得插件 + 技能，无需额外配置。
 
 ## 安装
 
@@ -49,10 +51,22 @@ opencode 启动时会用 Bun 自动安装，并按仓库 `package.json` 的入�
 
 ### 本地安装（不走 npm）
 
-把 `auto-readme.js` 复制到插件目录后重启 opencode：
+克隆或复制本仓库，然后在 `plugin` 数组中直接指向本地入口文件即可，插件内部的 config hook 会自动注册内置技能：
 
-- 全局：`~/.config/opencode/plugins/auto-readme.js`
-- 项目：`.opencode/plugins/auto-readme.js`
+```json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "plugin": ["~/github/opencode-auto-readme/auto-readme.js"]
+}
+```
+
+也可以手动分别复制，然后重启 opencode：
+
+- 插件（全局）：`auto-readme.js` -> `~/.config/opencode/plugins/auto-readme.js`
+- 插件（项目）：`auto-readme.js` -> `.opencode/plugins/auto-readme.js`
+- 技能：`skills/auto-readme/` -> `~/.config/opencode/skills/auto-readme/`（或 `.opencode/skills/auto-readme/`）
+
+注意：手动复制时插件文件脱离了包目录，它的 config hook 会指向不存在的 `skills/` 目录（该 hook 会被跳过，无碍），但请务必按上面最后一条同时复制技能目录。
 
 ## 工作原理
 
