@@ -34,6 +34,19 @@
 { "plugin": ["opencode-auto-readme@0.1.0"] }
 ```
 
+### 直接从 GitHub 安装（不走 npm）
+
+如果想直接从仓库拉取，使用 `name@git+https` 格式：
+
+```json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "plugin": ["opencode-auto-readme@git+https://github.com/littlekey/readme.skill.git"]
+}
+```
+
+opencode 启动时会用 Bun 自动安装，并按仓库 `package.json` 的入口加载，因此这条路不需要发布到 npm。
+
 ### 本地安装（不走 npm）
 
 把 `auto-readme.js` 复制到插件目录后重启 opencode：

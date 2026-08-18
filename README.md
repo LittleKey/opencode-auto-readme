@@ -34,6 +34,19 @@ You can also pin a version:
 { "plugin": ["opencode-auto-readme@0.1.0"] }
 ```
 
+### Install directly from GitHub (no npm)
+
+If you prefer pulling straight from the repository, use a `name@git+https` spec:
+
+```json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "plugin": ["opencode-auto-readme@git+https://github.com/littlekey/readme.skill.git"]
+}
+```
+
+opencode installs it with Bun at startup and resolves the package entry from the repo's `package.json`, so no npm publish is required for this path.
+
 ### Local install (no npm)
 
 Copy `auto-readme.js` into one of the plugin directories and restart opencode:
