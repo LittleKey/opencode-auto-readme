@@ -21,11 +21,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/littlekey/readme.skill.git"
+    "url": "git+https://github.com/littlekey/opencode-auto-readme.git"
   },
   "bugs": {
-    "url": "https://github.com/littlekey/readme.skill/issues"
+    "url": "https://github.com/littlekey/opencode-auto-readme/issues"
   },
-  "homepage": "https://github.com/littlekey/readme.skill#readme",
+  "homepage": "https://github.com/littlekey/opencode-auto-readme#readme",
   "license": "MIT"
 }

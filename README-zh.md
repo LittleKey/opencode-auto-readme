@@ -41,7 +41,7 @@
 ```json
 {
   "$schema": "https://opencode.ai/config.json",
-  "plugin": ["opencode-auto-readme@git+https://github.com/littlekey/readme.skill.git"]
+  "plugin": ["opencode-auto-readme@git+https://github.com/littlekey/opencode-auto-readme.git"]
 }
 ```
 
